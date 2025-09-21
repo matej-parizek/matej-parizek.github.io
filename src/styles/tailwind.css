@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Core Colors */
+    --color-background: #ffffff; /* white */
+    --color-foreground: #0f172a; /* slate-900 */
+    --color-border: #e2e8f0; /* slate-200 */
+    --color-input: #ffffff; /* white */
+    --color-ring: #2563eb; /* blue-600 */
+    
+    /* Card Colors */
+    --color-card: #ffffff; /* white */
+    --color-card-foreground: #0f172a; /* slate-900 */
+    
+    /* Popover Colors */
+    --color-popover: #ffffff; /* white */
+    --color-popover-foreground: #0f172a; /* slate-900 */
+    
+    /* Muted Colors */
+    --color-muted: #f8fafc; /* slate-50 */
+    --color-muted-foreground: #475569; /* slate-600 */
+    
+    /* Primary Colors */
+    --color-primary: #2563eb; /* blue-600 */
+    --color-primary-foreground: #ffffff; /* white */
+    
+    /* Secondary Colors */
+    --color-secondary: #64748b; /* slate-500 */
+    --color-secondary-foreground: #ffffff; /* white */
+    
+    /* Destructive Colors */
+    --color-destructive: #ef4444; /* red-500 */
+    --color-destructive-foreground: #ffffff; /* white */
+    
+    /* Accent Colors */
+    --color-accent: #f8fafc; /* slate-50 */
+    --color-accent-foreground: #0f172a; /* slate-900 */
+    
+    /* Success Colors */
+    --color-success: #10b981; /* emerald-500 */
+    --color-success-foreground: #ffffff; /* white */
+    
+    /* Warning Colors */
+    --color-warning: #f59e0b; /* amber-500 */
+    --color-warning-foreground: #ffffff; /* white */
+    
+    /* Error Colors */
+    --color-error: #ef4444; /* red-500 */
+    --color-error-foreground: #ffffff; /* white */
+    
+    /* Portfolio Specific Colors */
+    --color-surface: #f8fafc; /* slate-50 */
+    --color-text-primary: #0f172a; /* slate-900 */
+    --color-text-secondary: #475569; /* slate-600 */
+    --color-portfolio-accent: #059669; /* emerald-600 */
+    --color-portfolio-accent-foreground: #ffffff; /* white */
+  }
+  
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+  }
+  
+  .font-headline {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+  }
+  
+  .font-cta {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+  }
+  
+  .font-accent {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+  }
+}
+
+@layer components {
+  .shadow-professional {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  .shadow-testimonial {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  }
+  
+  .transition-professional {
+    transition: all 250ms ease-in-out;
+  }
+  
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+}
