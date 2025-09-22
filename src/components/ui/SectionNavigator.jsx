@@ -11,7 +11,7 @@ const SectionNavigator = () => {
     { label: 'Skills', anchor: 'skills', description: 'Technical capabilities showcase' },
     { label: 'Projects', anchor: 'projects', description: 'Featured work and case studies' },
     { label: 'Experience', anchor: 'experience', description: 'Professional timeline and achievements' },
-    { label: 'Services', anchor: 'services', description: 'Offerings and pricing details' },
+//    { label: 'Services', anchor: 'services', description: 'Offerings and pricing details' },
     { label: 'Contact', anchor: 'contact', description: 'Get in touch for consultation' }
   ];
 

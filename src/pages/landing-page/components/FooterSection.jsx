@@ -17,7 +17,7 @@ const FooterSection = () => {
     { label: 'Skills', anchor: 'skills' },
     { label: 'Projects', anchor: 'projects' },
     { label: 'Experience', anchor: 'experience' },
-    { label: 'Services', anchor: 'services' },
+    //{ label: 'Services', anchor: 'services' },
     { label: 'Contact', anchor: 'contact' }
   ];
 
@@ -138,7 +138,7 @@ const FooterSection = () => {
 
           {/* Newsletter & CTA */}
           <div className="space-y-6">
-            <h3 className="font-headline text-lg">Stay Updated</h3>
+            {/*<h3 className="font-headline text-lg">Stay Updated</h3>
             <p className="text-gray-300 text-sm">
               Get insights on web development trends, project updates, and exclusive tips.
             </p>
@@ -163,7 +163,7 @@ const FooterSection = () => {
                 No spam, unsubscribe anytime. Privacy policy applies.
               </p>
             </div>
-
+              */}
             {/* Quick Actions */}
             <div className="space-y-3">
               <Button

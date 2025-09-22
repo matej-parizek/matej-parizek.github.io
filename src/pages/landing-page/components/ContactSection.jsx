@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '../../../components/ui/Button';
 import Input from '../../../components/ui/Input';
 import Select from '../../../components/ui/Select';
 import Icon from '../../../components/AppIcon';
+import { sendEmail, initEmail } from '../../../utils/send-email';
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -19,6 +20,10 @@ const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
+
+  useEffect(() => {
+    initEmail();
+  }, []);
 
   const projectTypeOptions = [
     { value: 'web-app', label: 'Web Application' },
@@ -81,14 +86,14 @@ const ContactSection = () => {
     }
   ];
 
-  const handleInputChange = (e) => {
+    const handleInputChange = (e) => {
     const { name, value } = e?.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     if (errors?.[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
   };
-
+  
   const handleSelectChange = (name, value) => {
     setFormData(prev => ({ ...prev, [name]: value }));
     if (errors?.[name]) {
@@ -108,15 +113,11 @@ const ContactSection = () => {
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/?.test(formData?.email)) {
       newErrors.email = 'Please enter a valid email address';
     }
-    /*
-    if (!formData?.projectType) {
-      newErrors.projectType = 'Please select a project type';
-    }
-    */
+
     if (!formData?.message?.trim()) {
       newErrors.message = 'Please describe your project';
-    } else if (formData?.message?.trim()?.length < 20) {
-      newErrors.message = 'Please provide more details about your project (minimum 20 characters)';
+    } else if (formData?.message?.trim()?.length < 10) {
+      newErrors.message = 'Please provide details about what you’d like to discuss (minimum 10 characters)';
     }
 
     setErrors(newErrors);
@@ -134,7 +135,7 @@ const ContactSection = () => {
 
     // Simulate form submission
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await sendEmail(formData);
       setIsSubmitted(true);
       setFormData({
         name: '',
@@ -350,12 +351,12 @@ const ContactSection = () => {
 
                 <div>
                   <label className="block font-accent text-text-primary mb-2">
-                    Project Description *
+                    Write to Me *
                   </label>
                   <textarea
                     name="message"
                     rows={6}
-                    placeholder="Please describe your project, goals, and any specific requirements. The more details you provide, the better I can understand your needs and provide an accurate proposal."
+                    placeholder="Write your message here — let me know how I can help or what you’d like to discuss."
                     value={formData?.message}
                     onChange={handleInputChange}
                     className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-professional resize-none ${
@@ -367,7 +368,7 @@ const ContactSection = () => {
                     <p className="text-error text-sm mt-1">{errors?.message}</p>
                   )}
                   <p className="text-xs text-text-secondary mt-1">
-                    Minimum 20 characters. Current: {formData?.message?.length}
+                    Minimum 10 characters. Current: {formData?.message?.length}
                   </p>
                 </div>
 
@@ -412,8 +413,8 @@ const ContactSection = () => {
                 </Button>
 
                 <p className="text-xs text-text-secondary text-center">
-                  By submitting this form, you agree to receive project-related communications. 
-                  Your information is kept strictly confidential and never shared with third parties.
+                  By submitting this form, you agree to be contacted regarding your inquiry.  
+                  Your information will remain strictly confidential and will never be shared with third parties.
                 </p>
               </form>
             </div>
