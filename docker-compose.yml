@@ -15,8 +15,4 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
-    # README říká "npm start" — zachováme ho a jen předáme host/port
-    command: sh -lc "npm ci && npm start -- --host --port 5173"
-
-    # Pokud používáš yarn místo npm, přepiš jen command na:
-    # command: sh -lc "yarn install --frozen-lockfile && yarn start -- --host --port 5173"
+    command: sh -lc "npm install && npm start -- --host --port 5173"
