@@ -1,9 +1,12 @@
 import React from "react";
 import Routes from "./Routes";
+import { StorageProvider } from "./store/useStorage";
 
 function App() {
   return (
-    <Routes />
+    <StorageProvider>
+      <Routes />
+    </StorageProvider>
   );
 }
 

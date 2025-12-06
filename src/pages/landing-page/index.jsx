@@ -7,11 +7,8 @@ import AboutSection from './components/AboutSection';
 import SkillsSection from './components/SkillsSection';
 import ProjectsSection from './components/ProjectsSection';
 import ExperienceSection from './components/ExperienceSection';
-import TestimonialsSection from './components/TestimonialsSection';
-import ServicesSection from './components/ServicesSection';
 import ContactSection from './components/ContactSection';
 import FooterSection from './components/FooterSection';
-import PreviewBanner from './components/PreviewBanner';
 
 const LandingPage = () => {
   useEffect(() => {
@@ -22,7 +19,8 @@ const LandingPage = () => {
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription?.setAttribute('content', 
-        'Software Engeneer focused on Java & Kotlin with industry experience. I build reliable backend systems, REST APIs, and scalable microservices. I’m passionate about clean code, performance, and delivering value through every project.'
+        `Software Engeneer focused on Java & Kotlin with industry experience. I build reliable backend systems, REST APIs, and scalable microservices.
+         I’m passionate about clean code, performance.`
       );
     }
 
@@ -37,8 +35,8 @@ const LandingPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
-                { /* Preview Banner */ }
-      <PreviewBanner />
+      { /* Preview Banner */ }
+      { /*<PreviewBanner /> */ }
       {/* Navigation */}
       <SectionNavigator />
       {/* Scroll Progress Indicator */}

@@ -10,11 +10,12 @@ export const initEmail = () => {
   emailjs.init(EMAILJS_PUBLIC_KEY);
 }
 
-export const sendEmail = async ({ name, email, message, company = "", contactMethod = "Email" }) => {
+export const sendEmail = async ({ name, email, message, phone="", company = "", contactMethod = "Email" }) => {
   try {
     const payloadToMe = {
       from_name: name,
       from_email: email,
+      from_phone: phone,
       message: message,
       company: company,
       contact_method: contactMethod,

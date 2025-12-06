@@ -1,147 +1,11 @@
 import React, { useState } from 'react';
 import Icon from '../../../components/AppIcon';
+import { useStorage } from '../../../store/useStorage';
 
 const SkillsSection = () => {
   const [hoveredSkill, setHoveredSkill] = useState(null);
 
-  const skillCategories = [
-    {
-      category: 'Backend Development',
-      icon: 'Server',
-      skills: [
-        { 
-          name: 'Java & Spring Boot', 
-          proficiency: 85, 
-          years: 1.5, 
-          projects: 4,
-          description: 'Building enterprise applications using Spring Boot framework with clean architecture following MVC and layered architecture patterns.'
-        },
-        { 
-          name: 'API Design & REST', 
-          proficiency: 80, 
-          years: 1.5, 
-          projects: 4,
-          description: 'Designing and redesigning RESTful APIs to improve clarity, performance, and usability for internal and external consumers.'
-        },
-        { 
-          name: 'SQL & Databases', 
-          proficiency: 78, 
-          years: 1.5, 
-          projects: 4,
-          description: 'Database design, query optimization, and working with relational database systems including Liquibase/Flyway for migrations.'
-        },
-        { 
-          name: 'Unit Testing', 
-          proficiency: 75, 
-          years: 1, 
-          projects: 3,
-          description: 'Writing comprehensive unit tests to ensure high code quality and reliability in backend applications.'
-        }
-      ]
-    },
-    {
-      category: 'Frontend Development',
-      icon: 'Monitor',
-      skills: [
-        { 
-          name: 'TypeScript/JavaScript', 
-          proficiency: 80, 
-          years: 1.5, 
-          projects: 4,
-          description: 'Modern JavaScript and TypeScript development with focus on type safety and clean code practices.'
-        },
-        { 
-          name: 'Vue.js (Nuxt)', 
-          proficiency: 75, 
-          years: 1, 
-          projects: 3,
-          description: 'Building responsive web applications using Vue.js framework and Nuxt.js for enhanced functionality and performance.'
-        },
-        { 
-          name: 'HTML/CSS', 
-          proficiency: 70, 
-          years: 2, 
-          projects: 4,
-          description: 'Creating structured and styled web interfaces with modern CSS techniques and responsive design principles.'
-        },
-        { 
-          name: 'Component Architecture', 
-          proficiency: 72, 
-          years: 1, 
-          projects: 3,
-          description: 'Designing and implementing reusable component-based architectures for scalable frontend applications.'
-        }
-      ]
-    },
-    {
-      category: 'Tools & Technologies',
-      icon: 'Settings',
-      skills: [
-        { 
-          name: 'Git & Version Control', 
-          proficiency: 88, 
-          years: 2, 
-          projects: 4,
-          description: 'Advanced Git workflows, branch management, code collaboration and version control best practices in team environments.'
-        },
-        { 
-          name: 'Gradle/Maven', 
-          proficiency: 70, 
-          years: 1, 
-          projects: 3,
-          description: 'Build automation and dependency management using Gradle and Maven build systems for Java projects.'
-        },
-        { 
-          name: 'Liquibase/Flyway', 
-          proficiency: 65, 
-          years: 0.5, 
-          projects: 2,
-          description: 'Database migration and version control using Liquibase and Flyway tools for maintaining database schemas.'
-        },
-        { 
-          name: 'Technical Documentation', 
-          proficiency: 80, 
-          years: 1.5, 
-          projects: 4,
-          description: 'Creating comprehensive technical documentation including basic UML diagrams to illustrate architecture and module interactions.'
-        }
-      ]
-    },
-    {
-      category: 'Programming Languages',
-      icon: 'Code',
-      skills: [
-        { 
-          name: 'Java', 
-          proficiency: 85, 
-          years: 1.5, 
-          projects: 4,
-          description: 'Object-oriented programming with Java, focusing on enterprise development and best practices using core OOP principles.'
-        },
-        { 
-          name: 'Kotlin', 
-          proficiency: 70, 
-          years: 0.5, 
-          projects: 1,
-          description: 'Modern JVM language development with Kotlin, including Android app development using Jetpack Compose for university projects.'
-        },
-        { 
-          name: 'C/C++', 
-          proficiency: 65, 
-          years: 1, 
-          projects: 1,
-          description: 'System-level programming and algorithm implementation using C/C++ languages for university coursework.'
-        },
-        { 
-          name: 'Scala', 
-          proficiency: 55, 
-          years: 0.5, 
-          projects: 1,
-          description: 'Functional programming concepts and basic Scala development for academic projects and coursework.'
-        }
-      ]
-    }
-  ];
+  const {skills : skillCategories} = useStorage();
 
   return (
     <section id="skills" className="py-20 bg-muted">
@@ -172,11 +36,16 @@ const SkillsSection = () => {
                 {category?.skills?.map((skill, skillIndex) => (
                   <div
                     key={skill?.name}
-                    className="relative bg-background rounded-lg p-6 shadow-testimonial hover:shadow-professional transition-professional cursor-pointer group"
+                    className={`relative overflow-hidden bg-background rounded-lg p-6 shadow-testimonial hover:shadow-professional
+                       transition-professional cursor-pointer group
+                       ${hoveredSkill === `${categoryIndex}-${skillIndex}`
+                        ? 'ring-2 ring-opacity-20 max-h-[300px]'
+                        : 'ring-1 ring-border max-h-[180px]'
+                        }`}
                     onMouseEnter={() => setHoveredSkill(`${categoryIndex}-${skillIndex}`)}
                     onMouseLeave={() => setHoveredSkill(null)}
                   >
-                    <div className="space-y-4">
+                    <div className="space-y-4 relative z-10">
                       <div className="flex justify-between items-start">
                         <h4 className="font-accent text-text-primary group-hover:text-primary transition-professional">
                           {skill?.name}
@@ -203,10 +72,10 @@ const SkillsSection = () => {
                       {/* Hover Details */}
                       <div className={`transition-all duration-300 ${
                         hoveredSkill === `${categoryIndex}-${skillIndex}` 
-                          ? 'opacity-100 max-h-20' :'opacity-0 max-h-0 overflow-hidden'
+                          ? 'opacity-100 max-h-32 translate-y-0 pointer-events-auto' :'opacity-0 max-h-0 translate-y-3 pointer-events-none'
                       }`}>
                         <p className="text-sm text-text-secondary leading-relaxed">
-                          {skill?.description}
+                              {skill?.description /*`${categoryIndex} ${skillIndex}`*/}
                         </p>
                       </div>
 
@@ -224,8 +93,8 @@ const SkillsSection = () => {
                     </div>
 
                     {/* Hover Glow Effect */}
-                    <div className={`absolute inset-0 rounded-lg bg-gradient-to-r from-primary/5 to-portfolio-accent/5 transition-opacity duration-300 ${
-                      hoveredSkill === `${categoryIndex}-${skillIndex}` ? 'opacity-100' : 'opacity-0'
+                    <div className={`relative inset-0 rounded-lg bg-gradient-to-r from-primary/5 to-portfolio-accent/5 transition-opacity duration-300 ${
+                      hoveredSkill === `${categoryIndex}-${skillIndex}` ? 'opacity-100' : 'max-h-0 opacity-0'
                     }`}></div>
                   </div>
                 ))}
