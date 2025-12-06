@@ -1,52 +1,75 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo  } from 'react';
 import Image from '../../../components/AppImage';
 import Button from '../../../components/ui/Button';
 import Icon from '../../../components/AppIcon';
+import { useStorage } from '../../../store/useStorage';
+import { formatYears } from '../../../utils/date';
 
 const HeroSection = () => {
   const [projectCount, setProjectCount] = useState(0);
-  const [satisfactionRate, setSatisfactionRate] = useState(0);
   const [yearsExperience, setYearsExperience] = useState(0);
+  const [index, setIndex] = useState(0);
+  const { projects, hero } = useStorage();
+
+  const { header, subheader, currentCompany } = hero;
+
+  const sequence = useMemo(() => {
+    if (!header) return [];
+    return header.reduce((acc, part) => {
+      for (const ch of part.text.split("")) acc.push({ ch, cls: part.className });
+      return acc;
+    }, []);
+  }, [header]);
+
+  const lastestProject = useMemo(() => {
+    if (!projects || !projects.items || projects.items.length === 0) return 'No projects yet';
+    return projects.items.reduce((latest, project) => {
+      return new Date(project.date) > new Date(latest.date) ? project : latest;
+    }, projects.items[0]);
+  }, [projects.items]);
+
+
 
   useEffect(() => {
-    // Animate counters on component mount
+    // Counters
     const animateCounter = (setter, target, duration = 2000) => {
       let start = 0;
       const increment = target / (duration / 16);
-      const timer = setInterval(() => {
+      const t = setInterval(() => {
         start += increment;
         if (start >= target) {
           setter(target);
-          clearInterval(timer);
-        } else {
-          setter(Math.floor(start));
-        }
+          clearInterval(t);
+        } else setter(Math.floor(start));
       }, 16);
     };
 
     const timer = setTimeout(() => {
-      animateCounter(setProjectCount, 4);
-      animateCounter(setSatisfactionRate, 95);
+      animateCounter(setProjectCount, projects.items.length);
       animateCounter(setYearsExperience, 1.5);
     }, 500);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [projects.items.length]);
+
+  useEffect(() => {
+    if (index < sequence.length) {
+      const t = setTimeout(() => setIndex(i => i + 1), 200);
+      return () => clearTimeout(t);
+    }
+  }, [index, sequence.length]);
 
   const handleScheduleConsultation = () => {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection?.scrollIntoView({ behavior: 'smooth' });
-    }
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleDownloadResume = () => {
-    // Mock resume download
     const link = document.createElement('a');
     link.href = '#';
     link.download = 'matej-parizek-resume.pdf';
-    link?.click();
+    link.click();
   };
+  
 
   return (
     <section id="hero" className="min-h-screen bg-gradient-to-br from-background via-muted to-background flex items-center pt-16">
@@ -63,30 +86,27 @@ const HeroSection = () => {
             {/* Main Headline */}
             <div className="space-y-4">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-headline text-text-primary leading-tight">
-                Hi, I'm{' '}
-                <span className="text-primary">Matej Parizek</span>{' '}
-                Software Engineer
+                {sequence.slice(0, index).map((s, i) => (
+                  <span key={i} className={s.cls}>{s.ch}</span>
+                ))}
+                {/* blikající blokový kurzor */}
+                <span className="ml-1 inline-block h-[1em] w-[0.6ch] bg-cursor animate-blink translate-y-[8px]" />
               </h1>
+
               <p className="text-xl text-text-secondary leading-relaxed max-w-2xl">
-                Software Engineering student at Czech Technical University Prague with commercial experience 
-                at T-Mobile Czech Republic. Specialized in backend development, API design, and building 
-                scalable solutions using Java, Spring Boot, TypeScript, and Vue.js.
+                {subheader}
               </p>
             </div>
 
             {/* Achievement Metrics */}
-            <div className="grid grid-cols-3 gap-6 py-6">
+            <div className="grid grid-cols-2 gap-6 py-6">
               <div className="text-center">
-                <div className="text-3xl font-headline text-primary">4+</div>
+                <div className="text-3xl font-headline text-primary">{projectCount}+</div>
                 <div className="text-sm text-text-secondary">Projects Completed</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-headline text-primary">1.5+</div>
                 <div className="text-sm text-text-secondary">Years Experience</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-headline text-primary">95%</div>
-                <div className="text-sm text-text-secondary">Code Quality</div>
               </div>
             </div>
 
@@ -154,7 +174,7 @@ const HeroSection = () => {
                 </div>
                 <div>
                   <div className="text-sm font-accent text-text-primary">Latest Project</div>
-                  <div className="text-xs text-text-secondary">MB-TOOL WebEDI</div>
+                  <div className="text-xs text-text-secondary">{lastestProject.title}</div>
                 </div>
               </div>
             </div>
@@ -166,7 +186,7 @@ const HeroSection = () => {
                 </div>
                 <div>
                   <div className="text-sm font-accent text-text-primary">Currently at</div>
-                  <div className="text-xs text-text-secondary">T-Mobile Czech Republic</div>
+                  <div className="text-xs text-text-secondary">{currentCompany}</div>
                 </div>
               </div>
             </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Icon from '../AppIcon';
+import ThemeToggle from './ThemeToggle';
 
 const SectionNavigator = () => {
   const [activeSection, setActiveSection] = useState('hero');
@@ -73,7 +74,7 @@ const SectionNavigator = () => {
   return (
     <>
       <nav 
-        className={`fixed top-16 left-0 right-0 z-navigation transition-professional ${
+        className={`fixed top-1 left-0 right-0 transition-professional z-navigation ${
           isScrolled 
             ? 'bg-background/95 backdrop-blur-sm shadow-professional border-b border-border' 
             : 'bg-transparent'
@@ -111,6 +112,11 @@ const SectionNavigator = () => {
                   </button>
                 ))}
               </div>
+            </div>
+
+            {/* Dark mode toggle (right side on md+) */}
+            <div className="hidden md:flex items-center ml-6">
+              <ThemeToggle />
             </div>
 
             {/* Mobile menu button */}

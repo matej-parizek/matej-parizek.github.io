@@ -1,66 +1,74 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class', // nebo ['class']
   content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    './index.html',
+    './src/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
       colors: {
-        border: 'var(--color-border)', // slate-200
-        input: 'var(--color-input)', // white
-        ring: 'var(--color-ring)', // blue-600
-        background: 'var(--color-background)', // white
-        foreground: 'var(--color-foreground)', // slate-900
+        border: 'var(--color-border)',
+        input: 'var(--color-input)',
+        background: 'var(--color-background)',
+        foreground: 'var(--color-foreground)',
         primary: {
-          DEFAULT: 'var(--color-primary)', // blue-600
-          foreground: 'var(--color-primary-foreground)', // white
+          DEFAULT: 'var(--color-primary)',
+          foreground: 'var(--color-primary-foreground)',
         },
         secondary: {
-          DEFAULT: 'var(--color-secondary)', // slate-500
-          foreground: 'var(--color-secondary-foreground)', // white
+          DEFAULT: 'var(--color-secondary)',
+          foreground: 'var(--color-secondary-foreground)',
         },
         destructive: {
-          DEFAULT: 'var(--color-destructive)', // red-500
-          foreground: 'var(--color-destructive-foreground)', // white
+          DEFAULT: 'var(--color-destructive)',
+          foreground: 'var(--color-destructive-foreground)',
         },
         muted: {
-          DEFAULT: 'var(--color-muted)', // slate-50
-          foreground: 'var(--color-muted-foreground)', // slate-600
+          DEFAULT: 'var(--color-muted)',
+          foreground: 'var(--color-muted-foreground)',
         },
         accent: {
-          DEFAULT: 'var(--color-accent)', // slate-50
-          foreground: 'var(--color-accent-foreground)', // slate-900
+          DEFAULT: 'var(--color-accent)',
+          foreground: 'var(--color-accent-foreground)',
         },
         popover: {
-          DEFAULT: 'var(--color-popover)', // white
-          foreground: 'var(--color-popover-foreground)', // slate-900
+          DEFAULT: 'var(--color-popover)',
+          foreground: 'var(--color-popover-foreground)',
         },
         card: {
-          DEFAULT: 'var(--color-card)', // white
-          foreground: 'var(--color-card-foreground)', // slate-900
+          DEFAULT: 'var(--color-card)',
+          foreground: 'var(--color-card-foreground)',
         },
         success: {
-          DEFAULT: 'var(--color-success)', // emerald-500
-          foreground: 'var(--color-success-foreground)', // white
+          DEFAULT: 'var(--color-success)',
+          foreground: 'var(--color-success-foreground)',
         },
         warning: {
-          DEFAULT: 'var(--color-warning)', // amber-500
-          foreground: 'var(--color-warning-foreground)', // white
+          DEFAULT: 'var(--color-warning)',
+          foreground: 'var(--color-warning-foreground)',
         },
         error: {
-          DEFAULT: 'var(--color-error)', // red-500
-          foreground: 'var(--color-error-foreground)', // white
+          DEFAULT: 'var(--color-error)',
+          foreground: 'var(--color-error-foreground)',
         },
-        // Portfolio specific colors
-        surface: 'var(--color-surface)', // slate-50
-        'text-primary': 'var(--color-text-primary)', // slate-900
-        'text-secondary': 'var(--color-text-secondary)', // slate-600
+        surface: 'var(--color-surface)',
+        'text-primary': 'var(--color-text-primary)',
+        'text-secondary': 'var(--color-text-secondary)',
         'portfolio-accent': {
-          DEFAULT: 'var(--color-portfolio-accent)', // emerald-600
-          foreground: 'var(--color-portfolio-accent-foreground)', // white
+          DEFAULT: 'var(--color-portfolio-accent)',
+          foreground: 'var(--color-portfolio-accent-foreground)',
         },
+        cursor: 'var(--color-cursor)',
+        footer: 'var(--color-footer)',
+        footerText: 'var(--color-footer-text)',
       },
+
+      ringColor: {
+        DEFAULT: 'hsl(var(--ring) / 0.5)', // výchozí barva prstence s alfou 0.5
+        brand: 'hsl(var(--ring) / 2)', // volitelný alias
+      },
+
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
         headline: ['Inter', 'sans-serif'],
@@ -69,12 +77,12 @@ export default {
       },
       fontWeight: {
         headline: '700',
-        'cta': '600',
-        'accent': '500',
+        cta: '600',
+        accent: '500',
       },
       boxShadow: {
-        professional: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-        testimonial: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+        professional: "var(--shadow-professional)",
+        testimonial: "var(--shadow-testimonial)",
       },
       transitionDuration: {
         professional: '250ms',
@@ -83,18 +91,24 @@ export default {
         professional: 'ease-in-out',
       },
       spacing: {
-        '18': '4.5rem',
-        '88': '22rem',
+        18: '4.5rem',
+        88: '22rem',
       },
       zIndex: {
-        'navigation': '100',
+        navigation: '100',
         'floating-action': '150',
         'mobile-menu': '200',
       },
+      keyframes: {
+        blink: {
+          '0%, 100%': { opacity: 1 },
+          "50.01%,100%": { opacity: "0" },
+        },
+      },
+      animation: {
+        blink: 'blink 1s step-start infinite',
+      },
     },
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-    require('tailwindcss-animate'),
-  ],
-}
+  plugins: [require('@tailwindcss/typography'), require('tailwindcss-animate')],
+};

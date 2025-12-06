@@ -52,7 +52,7 @@ const FooterSection = () => {
   };
 
   return (
-    <footer className="bg-text-primary text-white">
+    <footer className="bg-footer text-footerText">
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
         <div className="grid lg:grid-cols-4 gap-12">
@@ -70,9 +70,56 @@ const FooterSection = () => {
               I’m passionate about clean code, performance, and delivering value through every project.
 
             </p>
+          </div>
+
+          {/* Quick Links */}
+          <div className="space-y-6 items-center flex flex-col">
+            <h3 className="font-headline text-lg">Quick Links</h3>
+            <div className="space-y-3">
+              {quickLinks?.map((link) => (
+                <button
+                  key={link?.anchor}
+                  onClick={() => scrollToSection(link?.anchor)}
+                  className="block text-gray-300 hover:text-primary transition-professional text-left"
+                >
+                  {link?.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Services */}
+          <div className="space-y-6 items-center flex flex-col">
+            <h3 className="font-headline text-lg">Services</h3>
+            <div className="space-y-3">
+              {services?.map((service) => (
+                <div key={service} className="text-gray-300 text-sm">
+                  {service}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Newsletter & CTA */}
+          <div className="space-y-6">
+          {/* Contact Info */}
+            <div className="space-y-3 items-center justify-center flex flex-col">
+              <div className="flex items-center space-x-2 text-gray-300">
+                <Icon name="Mail" size={16} />
+                <span className="text-sm">mat.parizek@seznam.cz</span>
+              </div>
+              <div className="flex items-center space-x-2 text-gray-300">
+                <Icon name="Phone" size={16} />
+                <span className="text-sm">+420 775 995 600</span>
+              </div>
+              <div className="flex items-center space-x-2 text-gray-300">
+                <Icon name="MapPin" size={16} />
+                <span className="text-sm">Prague, CZ</span>
+              </div>
+            </div>
 
             {/* Social Links */}
-            <div className="flex space-x-4">
+            <div className="flex space-x-4 justify-center">
               {socialLinks?.map((social) => (
                 <a
                   key={social?.name}
@@ -91,81 +138,9 @@ const FooterSection = () => {
               ))}
             </div>
 
-            {/* Contact Info */}
-            <div className="space-y-2">
-              <div className="flex items-center space-x-2 text-gray-300">
-                <Icon name="Mail" size={16} />
-                <span className="text-sm">mat.parizek@seznam.cz</span>
-              </div>
-              <div className="flex items-center space-x-2 text-gray-300">
-                <Icon name="Phone" size={16} />
-                <span className="text-sm">+420 775 995 600</span>
-              </div>
-              <div className="flex items-center space-x-2 text-gray-300">
-                <Icon name="MapPin" size={16} />
-                <span className="text-sm">Prague, CZ</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Quick Links */}
-          <div className="space-y-6">
-            <h3 className="font-headline text-lg">Quick Links</h3>
-            <div className="space-y-3">
-              {quickLinks?.map((link) => (
-                <button
-                  key={link?.anchor}
-                  onClick={() => scrollToSection(link?.anchor)}
-                  className="block text-gray-300 hover:text-primary transition-professional text-left"
-                >
-                  {link?.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Services */}
-          <div className="space-y-6">
-            <h3 className="font-headline text-lg">Services</h3>
-            <div className="space-y-3">
-              {services?.map((service) => (
-                <div key={service} className="text-gray-300 text-sm">
-                  {service}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Newsletter & CTA */}
-          <div className="space-y-6">
-            {/*<h3 className="font-headline text-lg">Stay Updated</h3>
-            <p className="text-gray-300 text-sm">
-              Get insights on web development trends, project updates, and exclusive tips.
-            </p>
             
-            <div className="space-y-3">
-              <div className="flex">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="flex-1 px-4 py-2 bg-white/10 border border-white/20 rounded-l-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                />
-                <Button
-                  variant="default"
-                  size="sm"
-                  className="rounded-l-none"
-                  iconName="Send"
-                >
-                  Subscribe
-                </Button>
-              </div>
-              <p className="text-xs text-gray-400">
-                No spam, unsubscribe anytime. Privacy policy applies.
-              </p>
-            </div>
-              */}
             {/* Quick Actions */}
-            <div className="space-y-3">
+            <div className="space-y-3 ">
               <Button
                 variant="outline"
                 size="sm"
@@ -175,7 +150,7 @@ const FooterSection = () => {
                 iconPosition="left"
                 className="border-white/20 text-white hover:bg-white hover:text-text-primary"
               >
-                Start a Project
+                Contact Me
               </Button>
               <Button
                 variant="ghost"
@@ -190,6 +165,7 @@ const FooterSection = () => {
                 Download Resume
               </Button>
             </div>
+
           </div>
         </div>
       </div>

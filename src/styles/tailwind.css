@@ -5,6 +5,7 @@
 
 @layer base {
   :root {
+    --ring: 224 76% 48%;           
     /* Core Colors */
     --color-background: #ffffff; /* white */
     --color-foreground: #0f172a; /* slate-900 */
@@ -58,8 +59,78 @@
     --color-text-secondary: #475569; /* slate-600 */
     --color-portfolio-accent: #059669; /* emerald-600 */
     --color-portfolio-accent-foreground: #ffffff; /* white */
+
+    --color-cursor: #000000;
+    --color-footer: #0f172a;
+    --color-footer-text: #A2A9B3;
+
+  --shadow-professional: 0 4px 6px -1px rgba(0,0,0,0.1),
+                         0 2px 4px -1px rgba(0,0,0,0.06);
+  --shadow-testimonial: 0 1px 3px 0 rgba(0,0,0,0.1),
+                        0 1px 2px 0 rgba(0,0,0,0.06);
   }
   
+.dark {
+  --ring: 46 70% 60%;            /* zlatá v HSL bez alfy */
+
+  /* Core */
+  --color-background: #080b14;       /* hodně tmavě modrá/černá */
+  --color-foreground: #ECEFF4;       /* soft white */
+  --color-border: #0D1117;           /* navy dark border */
+  --color-input: #0A0D14;            /* input background */
+
+  /* Zlatý focus ring */
+  --color-ring: #E3C65C;
+
+  /* Cards / Surfaces */
+  --color-card: #0B0E13;
+  --color-card-foreground: #E6EAF0;
+  --color-popover: #0C0F15;
+  --color-popover-foreground: #E6EAF0;
+
+  /* Muted */
+  --color-muted: #080c13;            /* galaxy dark muted */
+  --color-muted-foreground: #A2A9B3;
+
+  /* Primary (zlatá) */
+  --color-primary: #D4AF37;
+  --color-primary-foreground: #0B0B0B;
+
+  /* Secondary (grafitově modrá) */
+  --color-secondary: #1E2633;
+  --color-secondary-foreground: #E6EAF0;
+
+  /* Status */
+  --color-destructive: #EF4444;
+  --color-destructive-foreground: #0B0B0B;
+  --color-success: #22C55E;
+  --color-success-foreground: #0B0B0B;
+  --color-warning: #F59E0B;
+  --color-warning-foreground: #0B0B0B;
+  --color-error: #EF4444;
+  --color-error-foreground: #0B0B0B;
+
+  /* Texty / Portfolio */
+  --color-surface: #090C11;
+  --color-text-primary: #F3F6FB;
+  --color-text-secondary: #A2A9B3;
+
+  /* Druhý akcent – tmavší zlatohnědá */
+  --color-portfolio-accent: #A97C00;
+  --color-portfolio-accent-foreground: #0B0B0B;
+
+  --color-cursor: #FFFFFF;
+
+  /* Footer */
+  --color-footer: #0B0E14;          /* hodně tmavá modrá */
+  --color-footer-text: #A2A9B3;
+
+    --shadow-professional: 0 0 10px rgba(255,255,255,0.08),
+                        0 0 12px rgba(68, 56, 15, 0.25); /* zlatý glow */
+  --shadow-testimonial: 0 0 6px rgba(255,255,255,0.06),
+                        0 0 12px rgba(61, 50, 15, 0.25); /* zlatý glow */
+}
+
   * {
     @apply border-border;
   }
@@ -88,6 +159,7 @@
     font-family: 'Inter', sans-serif;
     font-weight: 500;
   }
+
 }
 
 @layer components {

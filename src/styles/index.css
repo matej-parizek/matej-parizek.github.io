@@ -10,3 +10,20 @@ body {
   font-family: inherit;
   margin: unset;
 }
+
+@keyframes blink { 
+  0%,50% { opacity: 1 } 
+  50.01%,100% { opacity: 0 } 
+}
+.animate-blink { 
+  animation: blink 1s step-end infinite; 
+}
+
+/* Invisible scrollbar for WebKit browsers */
+::-webkit-scrollbar {
+  display: none;
+}
+html, body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
