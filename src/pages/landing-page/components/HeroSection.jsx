@@ -70,7 +70,7 @@ const HeroSection = () => {
 
   const handleDownloadResume = () => {
   const url = '/assets/matej-parizek-resume.pdf';
-  window.open(url, "_blank", "noopener,noreferrer");
+  window.open(url, "_blank");
 };
 
   
