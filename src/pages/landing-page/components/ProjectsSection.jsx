@@ -4,10 +4,13 @@ import Button from '../../../components/ui/Button';
 import Icon from '../../../components/AppIcon';
 import { useStorage } from '../../../store/useStorage';
 import { calculateDuration, formatDuration } from '../../../utils/date';
+import RightsModal from '../../modal/RightsModal';
 
 const ProjectsSection = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [selectedProject, setSelectedProject] = useState(null);
+  const [rightsProject, setRightsProject] = useState(null);
+
 
   const filters = [
     { id: 'all', label: 'All Projects' },
@@ -40,7 +43,7 @@ const ProjectsSection = () => {
             <span className="text-primary"> Portfolio</span>
           </h2>
           <p className="text-lg text-text-secondary max-w-3xl mx-auto">
-            ${projects.about}
+            {projects.about}
           </p>
         </div>
 
@@ -63,7 +66,7 @@ const ProjectsSection = () => {
 
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 gap-8 items-stretch auto-rows-fr">
-          {filteredProjects?.map((project) => (
+          {filteredProjects?.sort((a, b) => new Date(b.endTime) - new Date(a.endTime))?.map((project) => (
             <div key={project?.id}
               className="bg-card rounded-lg shadow-testimonial hover:shadow-professional transition-professional overflow-hidden group flex flex-col h-full">
               <div className="relative overflow-hidden ">
@@ -75,27 +78,50 @@ const ProjectsSection = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-professional" />
                 <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-professional">
                   <div className="flex space-x-2">
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      iconName="ExternalLink"
-                      iconPosition="left"
-                      onClick={() => window.open(project?.liveUrl, '_blank')}
-                    >
-                      View Details
-                    </Button>
+                    { project?.liveUrl?.trim() && (
+                      <Button
+                        variant="secondary"
+                        size="sm"
+                        iconName="ExternalLink"
+                        iconPosition="left"
+                        onClick={() => window.open(project.liveUrl, "_blank", "noopener,noreferrer")}
+                      >
+                        Show project
+                      </Button>
+                    ) }
+                    
                     <Button
                       variant="outline"
+                      className="
+                        bg-white/50
+                        hover:bg-neutral-100
+                        transition-colors
+                        text-black/80
+                      "
                       size="sm"
                       iconName="Github"
                       iconPosition="left"
-                      onClick={() => window.open(project?.githubUrl, '_blank')}
-                    >
+                      onClick={() => {
+                        if (!project?.githubUrl || project?.githubUrl === "#") {
+                          setRightsProject(project);   // <- tady
+                        } else {
+                          window.open(project.githubUrl, "_blank", "noopener,noreferrer");
+                        }
+                      }}         
+                     >
                       Code
                     </Button>
+
                   </div>
                 </div>
               </div>
+
+              <RightsModal
+                isOpen={!!rightsProject}
+                owner={rightsProject?.rights || rightsProject?.client}
+                projectName={rightsProject?.title}
+                onClose={() => setRightsProject(null)}
+              />
 
               <div className="p-6 space-y-4 flex flex-col flex-1">
                 <div className="space-y-2">

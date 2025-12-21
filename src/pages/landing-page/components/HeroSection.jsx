@@ -4,14 +4,19 @@ import Button from '../../../components/ui/Button';
 import Icon from '../../../components/AppIcon';
 import { useStorage } from '../../../store/useStorage';
 import { formatYears } from '../../../utils/date';
+import { totalYearsExpirience } from '../../../utils/selected';
+
 
 const HeroSection = () => {
+  const { projects, hero, experiences } = useStorage();
   const [projectCount, setProjectCount] = useState(0);
-  const [yearsExperience, setYearsExperience] = useState(0);
   const [index, setIndex] = useState(0);
-  const { projects, hero } = useStorage();
-
+  const yearsOfCommercialExperience = experiences.filter(exp => exp.type.toUpperCase() !== 'education'.toUpperCase());
+  const totalYears = totalYearsExpirience(yearsOfCommercialExperience);
+  const [yearsExperience, setYearsExperience] = useState(0);
+  
   const { header, subheader, currentCompany } = hero;
+
 
   const sequence = useMemo(() => {
     if (!header) return [];
@@ -24,7 +29,7 @@ const HeroSection = () => {
   const lastestProject = useMemo(() => {
     if (!projects || !projects.items || projects.items.length === 0) return 'No projects yet';
     return projects.items.reduce((latest, project) => {
-      return new Date(project.date) > new Date(latest.date) ? project : latest;
+      return new Date(project.startTime) > new Date(latest.startTime) ? project : latest;
     }, projects.items[0]);
   }, [projects.items]);
 
@@ -46,7 +51,7 @@ const HeroSection = () => {
 
     const timer = setTimeout(() => {
       animateCounter(setProjectCount, projects.items.length);
-      animateCounter(setYearsExperience, 1.5);
+      animateCounter(setYearsExperience, Math.round(totalYears * 10) / 10);
     }, 500);
 
     return () => clearTimeout(timer);
@@ -105,7 +110,7 @@ const HeroSection = () => {
                 <div className="text-sm text-text-secondary">Projects Completed</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-headline text-primary">1.5+</div>
+                <div className="text-3xl font-headline text-primary">{yearsExperience}+</div>
                 <div className="text-sm text-text-secondary">Years Experience</div>
               </div>
             </div>

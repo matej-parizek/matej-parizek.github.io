@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Icon from '../../../components/AppIcon';
 import { useStorage } from '../../../store/useStorage';
 import { formatYears } from '../../../utils/date';
+import { totalYearsExpirience } from '../../../utils/selected';
 
 const ExperienceSection = () => {
   const [visibleItems, setVisibleItems] = useState(new Set());
@@ -34,12 +35,7 @@ const ExperienceSection = () => {
   };
 
   const yearsOfCommercialExperience = experiences.filter(exp => exp.type.toUpperCase() !== 'education'.toUpperCase());
-  const totalYears = yearsOfCommercialExperience.reduce((total, exp) => {
-    const start = exp.startDate.getTime();
-    const end = exp.endDate ? exp.endDate.getTime() : new Date().getTime();
-    const durationInYears = (end - start) / (1000 * 60 * 60 * 24 * 365);
-    return total + durationInYears;
-  }, 0);
+  const totalYears = totalYearsExpirience(yearsOfCommercialExperience);
 
   return (
     <section id="experience" ref={sectionRef} className="py-20 bg-muted">
