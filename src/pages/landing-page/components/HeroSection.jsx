@@ -69,11 +69,10 @@ const HeroSection = () => {
   };
 
   const handleDownloadResume = () => {
-    const link = document.createElement('a');
-    link.href = '#';
-    link.download = 'matej-parizek-resume.pdf';
-    link.click();
-  };
+  const url = "/assets/matej-parizek-resume.pdf";
+  window.open(url, "_blank", "noopener,noreferrer");
+};
+
   
 
   return (
