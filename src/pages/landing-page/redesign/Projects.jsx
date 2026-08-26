@@ -5,7 +5,7 @@ const Projects = () => (
     <div className="site-container section-grid">
       <header className="section-heading">
         <span className="section-number">02</span>
-        <div><p>Selected projects</p><h2 id="projects-heading">Backend systems with real constraints.</h2><span>Concise project evidence adapted from the English CV.</span></div>
+        <div><p>Selected projects</p><h2 id="projects-heading">Backend systems with real constraints.</h2></div>
       </header>
       <div className="project-list">
         {portfolioContent.projects.map((project, index) => (
