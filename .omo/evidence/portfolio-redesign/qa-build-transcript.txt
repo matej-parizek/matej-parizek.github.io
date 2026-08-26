@@ -1,0 +1,5 @@
+Build evidence
+
+Invocation: `npm run build`
+Result: PASS; Vite 5.0.0 transformed 1643 modules and emitted dist/index.html, dist/assets/index-Knw8QsqJ.js, dist/assets/index-CihJ2bTN.css; build completed in 17.58s.
+Warnings: deprecated Vite CJS API, stale browserslist data, and chunk-size advisory only.

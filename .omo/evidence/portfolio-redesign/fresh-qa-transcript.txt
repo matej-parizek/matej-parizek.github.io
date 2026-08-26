@@ -1,0 +1,17 @@
+Fresh manual QA run against http://127.0.0.1:4174/ (read-only; no form submission).
+
+Surface/invocations and observed results:
+- HTTP: `curl.exe -i http://127.0.0.1:4174/` -> HTTP/1.1 200 OK, text/html.
+- Desktop 1280x900: `agent-browser --session qa-final set viewport 1280 900`; open/reload; `eval` -> innerWidth=1280, scrollWidth=1280; fresh desktop screenshots captured.
+- Mobile 375x812: `set viewport 375 812`; `eval` -> innerWidth=375, scrollWidth=375; fresh light/dark/full-page screenshots captured.
+- Tablet 768x900: `set viewport 768 900`; `eval` -> innerWidth=768, scrollWidth=768; fresh screenshot captured.
+- Anchors: DOM target check for hero/about/skills/experience/projects/expertise/background/contact/top/main-content -> all exist; sequential anchor clicks for main anchors produced matching hashes; direct open `/#experience` -> hash=#experience and target top=79.859375.
+- Mobile menu: click Menu -> aria-expanded=true and nav class `is-open`; click Close -> aria-expanded=false; open then press Escape -> nav class `primary-navigation`, button text Menu, aria-expanded=false. Menu-open and closed screenshots captured.
+- Theme: click Dark mode -> html class `dark`, label Light mode; reload preserved dark; click Light mode -> html class empty, label Dark mode.
+- Project details: click first `summary` -> first details open=true and contribution/technology text visible; screenshot captured.
+- Keyboard focus: Tab from page start -> active View selected work, :focus-visible=true, computed outline `rgb(157, 63, 43) solid 2px`, outlineOffset=4px.
+- Form required: focus submit + Enter (noValidate client validation only) -> name/email/message aria-invalid=true, aria-describedby=name-error/email-error/message-error, matching error text, aria-live `Check the highlighted fields.`; full screenshot captured.
+- Form optional fields: fill name/email/phone/company/message and select contactMethod=Phone -> values retained; cleared network log reported `No requests captured` because form was not submitted.
+- Malformed email: replace email with `bad-email`, focus submit + Enter -> only email remains invalid with `email-describedby=email-error`; no requests captured.
+- CV/links: DOM exposed `/assets/Matej_Parizek_Resume.pdf` and `/assets/Matej_Parizek_Resume_CZ.pdf` with target=_blank; `curl.exe -sS -D - -o NUL` for both -> HTTP/1.1 200 OK, Content-Type=application/pdf. mailto, tel, and LinkedIn hrefs also present.
+- Errors: `agent-browser errors --clear`; `console --clear`; reload; `errors` and `console` returned no entries.
