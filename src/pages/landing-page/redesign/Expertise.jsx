@@ -6,7 +6,7 @@ const Expertise = () => (
     <div className="site-container section-grid">
       <header className="section-heading">
         <span className="section-number">03</span>
-        <div><p>Technical expertise</p><h2 id="expertise-heading">Backend-first, delivery-aware.</h2><span>A practical toolkit drawn from production and academic work — no arbitrary proficiency scores.</span></div>
+        <div><p>Technical expertise</p><h2 id="expertise-heading">Backend-first, delivery-aware.</h2></div>
       </header>
       <div className="expertise-grid">
         {portfolioContent.expertise.map((group) => (
