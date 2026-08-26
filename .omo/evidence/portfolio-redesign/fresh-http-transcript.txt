@@ -1,0 +1,15 @@
+HTTP checks for final preview surface.
+
+`curl.exe -i http://127.0.0.1:4174/`
+HTTP/1.1 200 OK
+Content-Type: text/html
+
+`curl.exe -sS -D - -o NUL http://127.0.0.1:4174/assets/Matej_Parizek_Resume.pdf`
+HTTP/1.1 200 OK
+Content-Type: application/pdf
+Content-Length: 106642
+
+`curl.exe -sS -D - -o NUL http://127.0.0.1:4174/assets/Matej_Parizek_Resume_CZ.pdf`
+HTTP/1.1 200 OK
+Content-Type: application/pdf
+Content-Length: 108616

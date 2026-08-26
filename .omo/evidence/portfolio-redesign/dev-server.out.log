@@ -1,0 +1,16 @@
+
+> matej-parizek@0.1.0 start
+> vite --host 127.0.0.1 --port 4173
+
+
+  VITE v5.0.0  ready in 500 ms
+
+  ➜  Local:   http://127.0.0.1:4173/
+8:21:40 PM [vite] page reload dist/index.html
+8:22:25 PM [vite] page reload dist/index.html
+8:22:32 PM [vite] page reload dist/index.html
+8:29:12 PM [vite] page reload dist/index.html
+8:35:24 PM [vite] page reload dist/index.html
+8:43:16 PM [vite] page reload dist/index.html
+8:43:59 PM [vite] page reload dist/index.html
+8:50:02 PM [vite] page reload dist/index.html

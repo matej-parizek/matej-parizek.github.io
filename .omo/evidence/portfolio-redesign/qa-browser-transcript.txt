@@ -1,0 +1,19 @@
+Manual QA browser fallback transcript (agent-browser, session portfolio-qa)
+
+Target: http://127.0.0.1:4174/
+
+Route/load: `open http://127.0.0.1:4174/` -> title "Matej Parizek — Backend Software Engineer"; root loaded.
+Unknown route: `open http://127.0.0.1:4174/not-a-route` -> h1 "404", "Page Not Found".
+Anchor: click Projects -> URL `/#projects`; direct `open .../#experience` -> heading "Production work, in context.", section top 79.86px.
+Mobile menu: viewport 375x812; click `button.menu-toggle` -> aria-expanded=true, nav display=grid, five nav links; click `#primary-navigation a[href='#contact']` -> hash cleared after SPA scroll, aria-expanded=false.
+Menu Escape augmented: open menu, `press Escape` -> aria-expanded remained true (P2 observation).
+Theme: click `.theme-control` -> html class dark, label Light mode; reload -> dark/Light mode persisted. Click again -> html class empty, label Dark mode; reload -> empty/Dark mode persisted.
+Disclosure: click `details:first-of-type summary` -> open=true; click again -> false; focus summary + Enter -> open=true, active element SUMMARY.
+Skip link: focus `.skip-link` -> active class skip-link and href #main-content; press Enter -> URL hash #main-content. Focus remained BODY after navigation (P2 observation).
+Focus: desktop 1280x900, focus `button.theme-control` -> outline `rgb(217, 120, 95) solid 2px`, offset 4px.
+Form empty: focus submit + Enter (no network send) -> invalid name/email/message, messages "Enter your name.", "Enter a valid email address.", "Add a short message.", live "Check the highlighted fields.".
+Form invalid email: fill name QA User, email bad-email, message meaningful; submit with keyboard -> only email invalid, "Enter a valid email address.".
+Whitespace augmented: name/message three spaces, valid email; submit with keyboard -> name and message invalid.
+Valid-form no-send guard: fill valid fields without submitting -> no invalid fields and no email-filtered requests captured.
+Links/overflow: DOM href extraction returned two CV PDF URLs target _blank, mailto, tel, LinkedIn target _blank; 375px scrollWidth=375 (overflow 0); 1280px scrollWidth=1280 (overflow 0).
+Console: after errors --clear and console --clear, reload/networkidle -> no page errors or console messages.

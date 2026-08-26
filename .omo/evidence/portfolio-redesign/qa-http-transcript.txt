@@ -1,0 +1,5 @@
+HTTP evidence (curl -i)
+
+`curl.exe -i http://127.0.0.1:4174/` -> HTTP/1.1 200 OK; Content-Type: text/html; Content-Length: 894; index.html references index-Knw8QsqJ.js and index-CihJ2bTN.css.
+`curl.exe -i http://127.0.0.1:4174/assets/Matej_Parizek_Resume.pdf` -> HTTP/1.1 200 OK; Content-Type: application/pdf; Content-Length: 106642.
+`curl.exe -i http://127.0.0.1:4174/assets/Matej_Parizek_Resume_CZ.pdf` -> HTTP/1.1 200 OK; Content-Type: application/pdf; non-empty PDF response.
